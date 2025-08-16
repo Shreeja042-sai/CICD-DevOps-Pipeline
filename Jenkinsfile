@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/Shreeja042-sai/CICD-DevOps-Pipeline.git'
+                git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/Shreeja042-sai/Boardgame-webapp.git'
             }
         }
         stage('Compile') {
@@ -32,7 +32,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv("sonar") {
-                    sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Devsecops-project -Dsonar.projectKey=Devsecops \
+                    sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Boardgame-webapp -Dsonar.projectKey=Boardgame \
                            -Dsonar.java.binaries=. '''
                 }
             }
@@ -60,21 +60,21 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'Docker-cred', url: 'https://index.docker.io/v1/'){
-                        sh "docker build -t shreeja042/devsecops:latest ."
+                        sh "docker build -t shreeja042/Boardgame-webapp:latest ."
                     }
                 }
             }
         }
         stage('Docker Image Scan') {
             steps {
-                sh "trivy image --format table -o trivy-image-report.html shreeja042/devsecops:latest"
+                sh "trivy image --format table -o trivy-image-report.html shreeja042/Boardgame-webapp:latest"
             }
         }
         stage('Push Docker Image') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'Docker-cred', url: 'https://index.docker.io/v1/'){
-                        sh "docker push shreeja042/devsecops:latest"
+                        sh "docker push shreeja042/Boardgame-webapp:latest"
                     }
                 }
             }
@@ -95,7 +95,7 @@ pipeline {
             }
         }
     }
-    
+
     post{
         always{
             script { 
@@ -127,6 +127,6 @@ pipeline {
                     attachmentsPattern: 'trivy-image-report.html' 
                 )
             }
-        }
-    }
+        } 
+    } 
 }
