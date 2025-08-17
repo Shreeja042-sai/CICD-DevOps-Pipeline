@@ -14,6 +14,7 @@ The architecture illustrates how the application flows from **code commit** to *
 
 Below is the architecture diagram for the CI/CD DevOps Pipeline:
 
+
 ![Architecture Diagram](Image/CICD-Pipeline.jpg)
 
 ## CI/CD Pipeline Stages
@@ -45,12 +46,13 @@ Below is the architecture diagram for the CI/CD DevOps Pipeline:
    - Pushes the Docker image to **Docker Hub** for deployment.
 
 **Deploy to Kubernetes**
+
 Applies `deployment-service.yaml` to deploy the application in the `webapps` namespace.  
   - Verifies pods are running: `kubectl get pods -n webapps`
   - Checks services: `kubectl get svc -n webapps`
 
 **Email Notification**
-    - Sends HTML email with pipeline status, build number, and attached security reports.
+   - Sends HTML email with pipeline status, build number, and attached security reports.
 
 ## Tools & Technologies Used
 - **CI/CD:** Jenkins  
@@ -67,26 +69,15 @@ Applies `deployment-service.yaml` to deploy the application in the `webapps` nam
 
 ## How to Run
 
-Clone the source code:
-
-```bash
-git clone https://github.com/Shreeja042-sai/Boardgame-webapp
-
-Open Jenkins and create a new pipeline using the **Jenkinsfile** provided in the repository.
-
-Ensure required credentials are configured in Jenkins:
-
-GitHub (git-cred)
-
-Docker Hub (Docker-cred)
-
-SonarQube (sonar-token)
-
-Kubernetes (k8-cred)
-
-Trigger the pipeline. Jenkins will automatically build, test, scan, package, and deploy the application.
-
-Access the deployed application via the Kubernetes service endpoint.
+1. Clone the repository: git clone https://github.com/Shreeja042-sai/Boardgame-webapp
+2. Open Jenkins and create a new pipeline using the **Jenkinsfile** provided in the repository.
+3. Ensure required credentials are configured in Jenkins:
+   - GitHub (git-cred)
+   - Docker Hub (Docker-cred)
+   - SonarQube (sonar-token)
+   - Kubernetes (k8-cred)
+4. Trigger the pipeline. Jenkins will automatically build, test, scan, package, and deploy the application.
+5. Access the deployed application via the Kubernetes service endpoint.
 
 ## Monitoring
 
