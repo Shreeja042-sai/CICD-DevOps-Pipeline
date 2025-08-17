@@ -12,7 +12,7 @@ This project implements a complete **CI/CD DevOps pipeline** for deploying the *
 
 Below is the architecture diagram for the CI/CD DevOps Pipeline:
 
-![Architecture Diagram](Image/CICD-Pipeline)
+![Architecture Diagram](Image/CICD-Pipeline.jpg)
 
 
 
