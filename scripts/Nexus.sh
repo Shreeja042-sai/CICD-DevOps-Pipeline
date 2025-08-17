@@ -24,3 +24,6 @@ sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 
+
+# Run Nexus container in detached mode with port mapping
+# docker run -d --name nexus -p 8081:8081 sonatype/nexus3:latest
